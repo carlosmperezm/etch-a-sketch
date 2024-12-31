@@ -9,32 +9,32 @@ const boardSectionHeightInt = parseInt(boardSectionHeight.slice(0, -2));
 let color;
 
 function generateGrid(numberOfSquares) {
-  const dimesions = numberOfSquares * numberOfSquares
+  const size = boardSectionHeightInt / numberOfSquares;
 
-  for (let i = 0; i < boardSectionHeightInt; i++) {
+  let totalPixelsAdded = 0;
+
+  while (boardSectionHeightInt > totalPixelsAdded) {
     let div = document.createElement("div");
     div.classList.add("square");
-    div.style.height = `${boardSectionHeightInt / numberOfSquares}px`;
-    div.style.width = `${boardSectionHeightInt / numberOfSquares}px`;
+    div.style.height = `${size}px`;
+    div.style.width = `${size}px`;
     boardSection.appendChild(div);
+    totalPixelsAdded += size / numberOfSquares;
   }
 }
 
 function changeBackgroundColor(domElement, color) {
-
   domElement.style.backgroundColor = color || `rgb(${getRandomRgb()}, ${getRandomRgb()}, ${getRandomRgb()})`;
-  console.log(parseInt(boardSectionHeight.slice(0, -2)));
 }
-
 
 function getRandomRgb() {
   return Math.floor(Math.random() * 255) + 1;
 }
 
-generateGrid(16);
+generateGrid(32);
 
 eraserButton.addEventListener("click", () => color = "White")
 boardSection.addEventListener("mouseover", evnt => {
-  if (evnt.target.className != "board") changeBackgroundColor(evnt.target, color);
+  if (evnt.target.className === "square") changeBackgroundColor(evnt.target, color);
 });
 
