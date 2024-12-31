@@ -1,6 +1,7 @@
 const boardSection = document.querySelector(".board");
 const eraserButton = document.querySelector("#eraser");
 const clearButton = document.querySelector("#clear");
+const paintButton = document.querySelector("#paint");
 const boardSectionHeight = window.getComputedStyle(boardSection).getPropertyValue("height");
 const boardSectionHeightInt = parseInt(boardSectionHeight.slice(0, -2));
 const WHITE = "White";
@@ -42,6 +43,7 @@ function clearBoard() {
 generateGrid(dimensions.value);
 
 eraserButton.addEventListener("click", () => color = WHITE);
+paintButton.addEventListener("click", () => color = null);
 
 boardSection.addEventListener("mouseover", evnt => {
   if (evnt.target.className === "square") changeBackgroundColor(evnt.target, color);
@@ -50,3 +52,4 @@ boardSection.addEventListener("mouseover", evnt => {
 clearButton.addEventListener("click", clearBoard);
 
 dimensionsInput.addEventListener("click", clearBoard);
+
