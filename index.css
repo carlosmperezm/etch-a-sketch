@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -7,17 +9,20 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
+  gap: 2rem;
+  background-color: #ddd;
 }
 
 .board {
   display: flex;
   flex-wrap: wrap;
-  /* flex-basis: 16rem; */
+  width: 60vw;
+  background-color: White;
+  /* height: 60vh; */
 }
 
 .square {
   background-color: Red;
   width: 1rem;
   height: 1rem;
-  /* border: 1px solid; */
 }
