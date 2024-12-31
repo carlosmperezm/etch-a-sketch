@@ -14,7 +14,6 @@ dimensionsInput.min = 16;
 dimensionsInput.max = 100;
 
 let eraseMode = false;
-let rainbowMode = true;
 
 function generateGrid(numberOfSquares) {
   const size = boardSectionHeightInt / numberOfSquares;
@@ -36,7 +35,7 @@ function changeBackgroundColor(domElement, color) {
   if (eraseMode) {
     domElement.style.backgroundColor = WHITE;
   }
-  else if (rainbowMode) {
+  else if (rainbowButton.classList.contains("rainbow")) {
     domElement.style.backgroundColor = `rgb(${getRandomRgb()}, ${getRandomRgb()}, ${getRandomRgb()})`;
   }
   else {
@@ -49,16 +48,21 @@ function getRandomRgb() {
 }
 
 function clearBoard() {
-  boardSection.innerHTML = "";
-  generateGrid(parseInt(dimensions.value));
   rainbowMode = true;
   eraseMode = false;
+  boardSection.innerHTML = "";
+  generateGrid(parseInt(dimensions.value));
 }
 
 generateGrid(dimensions.value);
 
-colorPicker.addEventListener("click", () => rainbowMode = false);
-rainbowButton.addEventListener("click", () => rainbowMode = true);
+colorPicker.addEventListener("click", () => {
+  rainbowButton.classList.remove("rainbow");
+});
+rainbowButton.addEventListener("click", () => {
+  rainbowButton.classList.toggle("rainbow");
+  rainbowButton.classList.toggle("default");
+});
 eraserButton.addEventListener("click", () => eraseMode = true);
 paintButton.addEventListener("click", () => eraseMode = false);
 clearButton.addEventListener("click", clearBoard);

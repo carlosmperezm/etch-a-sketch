@@ -16,9 +16,9 @@ body {
 .board {
   display: flex;
   flex-wrap: wrap;
-  width: 400px;
+  width: 800px;
   background-color: White;
-  height: 400px;
+  height: 800px;
 }
 
 .options {
@@ -30,4 +30,24 @@ body {
 #dimensions-container {
   display: flex;
   flex-direction: column;
+}
+
+button {
+  padding: 3px;
+  width: 8rem;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.rainbow {
+  background: linear-gradient(45deg, Violet, Indigo, Blue, Green, Yellow, Orange, Red);
+  color: White;
+
+}
+
+.default {
+  /* background: initial; */
+  color: Black;
 }
