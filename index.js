@@ -4,7 +4,10 @@ const clearButton = document.querySelector("#clear");
 const boardSectionHeight = window.getComputedStyle(boardSection).getPropertyValue("height");
 const boardSectionHeightInt = parseInt(boardSectionHeight.slice(0, -2));
 const WHITE = "White";
-const dimensions = 32;
+const dimensionsInput = document.querySelector("#dimensions");
+
+dimensionsInput.min = 16;
+dimensionsInput.max = 64;
 
 let color;
 
@@ -31,7 +34,12 @@ function getRandomRgb() {
   return Math.floor(Math.random() * 255) + 1;
 }
 
-generateGrid(dimensions);
+function clearBoard() {
+  boardSection.innerHTML = "";
+  generateGrid(parseInt(dimensions.value));
+}
+
+generateGrid(dimensions.value);
 
 eraserButton.addEventListener("click", () => color = WHITE);
 
@@ -39,7 +47,6 @@ boardSection.addEventListener("mouseover", evnt => {
   if (evnt.target.className === "square") changeBackgroundColor(evnt.target, color);
 });
 
-clearButton.addEventListener("click", () => {
-  boardSection.innerHTML = "";
-  generateGrid(dimensions);
-})
+clearButton.addEventListener("click", clearBoard);
+
+dimensionsInput.addEventListener("click", clearBoard);
