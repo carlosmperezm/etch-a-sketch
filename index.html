@@ -9,16 +9,24 @@
 
 <body>
   <section class="options">
+    <div id="color-picker-container">
+      <label for="color">Pick a color</label>
+      <input type="color" id="color">
+    </div>
+
+    <button id="rainbow"">Rainbow Mode</button>
     <button id="paint">Paint</button>
     <button id="eraser">Eraser</button>
     <button id="clear">Clear</button>
+
     <div id="dimensions-container">
       <label for="dimensions">Set the dimensions of the board</label>
       <input type="range" id="dimensions">
     </div>
   </section>
-  <section class="board">
-  </section>
+
+  <section class="board"> </section>
+
   <script src="index.js"></script>
 </body>
 

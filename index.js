@@ -6,11 +6,15 @@ const boardSectionHeight = window.getComputedStyle(boardSection).getPropertyValu
 const boardSectionHeightInt = parseInt(boardSectionHeight.slice(0, -2));
 const WHITE = "White";
 const dimensionsInput = document.querySelector("#dimensions");
+const colorPicker = document.querySelector("#color");
+const rainbowButton = document.querySelector("#rainbow");
+
 
 dimensionsInput.min = 16;
-dimensionsInput.max = 64;
+dimensionsInput.max = 100;
 
-let color;
+let eraseMode = false;
+let rainbowMode = true;
 
 function generateGrid(numberOfSquares) {
   const size = boardSectionHeightInt / numberOfSquares;
@@ -28,7 +32,16 @@ function generateGrid(numberOfSquares) {
 }
 
 function changeBackgroundColor(domElement, color) {
-  domElement.style.backgroundColor = color || `rgb(${getRandomRgb()}, ${getRandomRgb()}, ${getRandomRgb()})`;
+
+  if (eraseMode) {
+    domElement.style.backgroundColor = WHITE;
+  }
+  else if (rainbowMode) {
+    domElement.style.backgroundColor = `rgb(${getRandomRgb()}, ${getRandomRgb()}, ${getRandomRgb()})`;
+  }
+  else {
+    domElement.style.backgroundColor = color;
+  }
 }
 
 function getRandomRgb() {
@@ -38,18 +51,17 @@ function getRandomRgb() {
 function clearBoard() {
   boardSection.innerHTML = "";
   generateGrid(parseInt(dimensions.value));
+  rainbowMode = true;
+  eraseMode = false;
 }
 
 generateGrid(dimensions.value);
 
-eraserButton.addEventListener("click", () => color = WHITE);
-paintButton.addEventListener("click", () => color = null);
-
-boardSection.addEventListener("mouseover", evnt => {
-  if (evnt.target.className === "square") changeBackgroundColor(evnt.target, color);
-});
-
+colorPicker.addEventListener("click", () => rainbowMode = false);
+rainbowButton.addEventListener("click", () => rainbowMode = true);
+eraserButton.addEventListener("click", () => eraseMode = true);
+paintButton.addEventListener("click", () => eraseMode = false);
 clearButton.addEventListener("click", clearBoard);
-
 dimensionsInput.addEventListener("click", clearBoard);
+boardSection.addEventListener("mouseover", evnt => { if (evnt.target.className === "square") changeBackgroundColor(evnt.target, colorPicker.value); });
 
