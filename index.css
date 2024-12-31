@@ -16,13 +16,12 @@ body {
 .board {
   display: flex;
   flex-wrap: wrap;
-  width: 60vw;
+  width: 50vw;
   background-color: White;
-  /* height: 60vh; */
+  height: 50vh;
 }
 
 .square {
-  background-color: Red;
-  width: 1rem;
-  height: 1rem;
+  border: 1px solid;
+  /* background-color: Red; */
 }
